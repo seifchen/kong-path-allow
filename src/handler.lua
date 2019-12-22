@@ -8,7 +8,6 @@ local ngx = ngx
 local function match(source,target, regex)
     if regex then
         local from = ngx.re.find(source, target)
-        kong.log.info("path:",source, " prefix:",target, " from:",from)
         if from == 1 then
             return true
         end
