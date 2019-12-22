@@ -6,8 +6,12 @@ local kong = kong
 local ngx = ngx
 
 local function match(source,target, regex)
-    if regex and ngx.re.match(source, target) then
-        return true
+    if regex then
+        local from = ngx.re.find(source, target)
+        kong.log.info("path:",source, " prefix:",target, " from:",from)
+        if from == 1 then
+            return true
+        end
     end
     if not regex and source == target then
         return true
@@ -22,11 +26,16 @@ local function get_path()
         return path
     end
 
-    local result, flag
+    local from, to,req_path
     for _, prefix in ipairs(route.paths) do
-        result, flag = ngx.re.gsub(path, prefix, '/','ajo')
-        if flag == 1 then
-            return result
+        from, to = ngx.re.find(path, prefix, "jo")
+        if from == 1 then
+            req_path = string.sub(path, to+1, #path)
+            from = ngx.re.find(req_path, "/", "jo")
+            if not from then
+                req_path = '/' .. req_path
+            end
+            return req_path
         end
     end
     return ""
