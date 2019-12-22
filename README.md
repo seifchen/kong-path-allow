@@ -1,6 +1,7 @@
 # kong-path-whitelist
 Determine if the path is in the path whitelist, if not, return 403
-
+# Supporte kong version
+Kong >= 1.2
 # Install
 ### Luarocks
 ```
