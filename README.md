@@ -53,7 +53,7 @@ $ luarocks make *.rockspec
 	}}
 ```
 * request /test/services will return the services object
-* request /test/services2 will get 404 not 403
+* request /test/services2 will got 404 not 403
 ```
   HTTP/1.1 404 Not Found
   Content-Type: application/json; charset=utf-8
@@ -67,6 +67,10 @@ $ luarocks make *.rockspec
   Via: kong/1.4.0
   * Connection #0 to host localhost left intact
   {"message":"Not found"}
+```
+* request /test/routes will got 403
+```
+{"message":"path not allowed","code":403}
 ```
 
 
@@ -85,7 +89,7 @@ curl -X PATCH \
 ```
 
 * request /test/services will return the services object
-* request /test/services2 will get 403 code
+* request /test/services2 will got 403 code
 ```
 {"message":"path not allowed","code":403}
 ```
