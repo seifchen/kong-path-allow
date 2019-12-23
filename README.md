@@ -71,7 +71,7 @@ $ luarocks make *.rockspec
 ```
 * request /test/routes will got 403
 ```
-{"message":"path not allowed","code":403}
+{"message":"path not allowed"}
 ```
 
 
@@ -92,5 +92,5 @@ curl -X PATCH \
 * request /test/services will return the services object
 * request /test/services2 will got 403 code
 ```
-{"message":"path not allowed","code":403}
+{"message":"path not allowed"}
 ```

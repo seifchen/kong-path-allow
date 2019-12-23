@@ -50,7 +50,7 @@ function kongPathWhitelist:access(config)
             return
         end
     end
-    kong.response.exit(403, json.encode({code = 403, message = "path not allowed"}), {
+    kong.response.exit(403, json.encode({message = "path not allowed"}), {
         ["Content-Type"] = "application/json"})
 end
 
