@@ -4,10 +4,12 @@ local kongPathWhitelist = {}
 kongPathWhitelist.PRIORITY = 2400
 local kong = kong
 local ngx = ngx
+local re_find = ngx.re.find
+local sub = string.sub
 
 local function match(source,target, regex)
     if regex then
-        local from = ngx.re.find(source, target)
+        local from = re_find(source, target)
         if from == 1 then
             return true
         end
@@ -18,19 +20,22 @@ local function match(source,target, regex)
     return false
 end
 
-local function get_path()
-    local path = kong.request.get_path()
+local function get_target_path()
+    local get_path = kong.request.get_path
+    local path = get_path()
     local route = ngx.ctx.route
-    if false == route.strip_path then
+    local strip_path = route.strip_path
+    if false == strip_path then
         return path
     end
 
+    local paths = route.paths
     local from, to,req_path
-    for _, prefix in ipairs(route.paths) do
-        from, to = ngx.re.find(path, prefix, "jo")
+    for _, prefix in ipairs(paths) do
+        from, to = re_find(path, prefix, "jo")
         if from == 1 then
-            req_path = string.sub(path, to+1, #path)
-            from = ngx.re.find(req_path, "/", "jo")
+            req_path = sub(path, to+1, #path)
+            from = re_find(req_path, "/", "jo")
             if not from then
                 req_path = '/' .. req_path
             end
@@ -44,7 +49,7 @@ function kongPathWhitelist:access(config)
     local white_paths = config.white_paths
     local regex = config.regex
 
-    local target_path = get_path()
+    local target_path = get_target_path()
     for _, path in ipairs(white_paths) do
         if match(target_path, path, regex) then
             return
