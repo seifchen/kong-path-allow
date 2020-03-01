@@ -1,7 +1,7 @@
 local json = require("cjson")
 local kongPathWhitelist = {}
 
-kongPathWhitelist.PRIORITY = 2400
+kongPathWhitelist.PRIORITY = 840
 local kong = kong
 local ngx = ngx
 local re_find = ngx.re.find
