@@ -81,7 +81,7 @@ curl -X PATCH \
   http://localhost:8001/routes/$routeId/plugins/$pluginId \
   -H 'Content-Type: application/json' \
   -d '{
-	"name":"kong-path-allowed",
+	"name":"kong-path-allow",
 	"config":{
 		"allow_paths":["/services"],
 		"regex":false
