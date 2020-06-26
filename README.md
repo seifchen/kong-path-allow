@@ -1,24 +1,24 @@
-# kong-path-whitelist
-Determine if the path is in the path whitelist, if not, return 403
+# kong-path-allow
+Determine if the path is in the path allow, if not, return 403
 # Supporte kong version
 Kong >= 1.2
 # Install
 ### Luarocks
 ```
-luarocks install kong-path-whitelist
+luarocks install kong-path-allow
 ```
 
 ### Source Code
 ```
-$ git clone https://github.com/seifchen/kong-path-whitelist.git
-$ cd /path/to/kong/plugins/kong-path-whitelist
+$ git clone https://github.com/seifchen/kong-path-allow.git
+$ cd /path/to/kong/plugins/kong-path-allow
 $ luarocks make *.rockspec
 ```
 
 # Usage
 ## schema
-* white_paths: The request path not match this path will forbidden with 403 code
-* regex: boolean, if true will use ngx.re.match to match the request_path and white_paths, if false, Will strictly judge whether the two path are equal
+* allow_paths: The request path not match this path will forbidden with 403 code
+* regex: boolean, if true will use ngx.re.match to match the request_path and allow_paths, if false, Will strictly judge whether the two path are equal
 
 ## Example
 * create service
@@ -27,7 +27,7 @@ $ luarocks make *.rockspec
   http://localhost:8001/services \
   -H 'Content-Type: application/json' \
   -d '{
-	"name":"kong-path-whitelist-test",
+	"name":"kong-path-allow-test",
 	"protocol":"http",
 	"host":"localhost",
 	"port":8001}
@@ -35,21 +35,21 @@ $ luarocks make *.rockspec
 * create route
 ```
   curl -X POST \
-  http://localhost:8001/services/kong-path-whitelist-test/routes \
+  http://localhost:8001/services/kong-path-allow-test/routes \
   -H 'Content-Type: application/json' \
   -d '{
-	"name":"kong-path-whitelist-test",
+	"name":"kong-path-allow-test",
 	"paths":["/services"]}
 ```
-* create kong-path-whitelist for route
+* create kong-path-allow for route
 ```
   curl -X POST \
   http://localhost:8001/routes/$routeId/plugins \
   -H 'Content-Type: application/json' \
   -d '{
-	"name":"kong-path-whitelist",
+	"name":"kong-path-allow",
 	"config":{
-		"white_paths":["/services"],
+		"allow_paths":["/services"],
 		"regex":true
 	}}
 ```
@@ -81,9 +81,9 @@ curl -X PATCH \
   http://localhost:8001/routes/$routeId/plugins/$pluginId \
   -H 'Content-Type: application/json' \
   -d '{
-	"name":"kong-path-whitelist",
+	"name":"kong-path-allowed",
 	"config":{
-		"white_paths":["/services"],
+		"allow_paths":["/services"],
 		"regex":false
 	}
    }

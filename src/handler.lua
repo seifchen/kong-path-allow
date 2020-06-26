@@ -1,7 +1,7 @@
 local json = require("cjson")
-local kongPathWhitelist = {}
+local kongPathAllow = {}
 
-kongPathWhitelist.PRIORITY = 840
+kongPathAllow.PRIORITY = 840
 local kong = kong
 local ngx = ngx
 local re_find = ngx.re.find
@@ -45,12 +45,12 @@ local function get_target_path()
     return ""
 end
 
-function kongPathWhitelist:access(config)
-    local white_paths = config.white_paths
+function kongPathAllow:access(config)
+    local allow_paths = config.allow_paths
     local regex = config.regex
 
     local target_path = get_target_path()
-    for _, path in ipairs(white_paths) do
+    for _, path in ipairs(allow_paths) do
         if match(target_path, path, regex) then
             return
         end
@@ -59,4 +59,4 @@ function kongPathWhitelist:access(config)
         ["Content-Type"] = "application/json"})
 end
 
-return kongPathWhitelist
+return kongPathAllow
