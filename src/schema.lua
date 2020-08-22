@@ -7,12 +7,7 @@ return {
     { config = {
         type = "record",
         fields = {
-          { allow_paths = {
-              type = "array",
-              required = true,
-              elements = typedefs.path
-          }
-        },
+          { allow_paths = typedefs.paths},
           { regex = {
               type = "boolean",
               required = true,
