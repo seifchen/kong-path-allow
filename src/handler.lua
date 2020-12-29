@@ -36,7 +36,7 @@ local function get_target_path()
         if from == 1 then
             req_path = sub(path, to+1, #path)
             from = re_find(req_path, "/", "jo")
-            if not from then
+            if not from or from ~=1 then
                 req_path = '/' .. req_path
             end
             return req_path
