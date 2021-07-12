@@ -2,7 +2,7 @@ package = "kong-path-allow"
 version = "0.1-2"
 source = {
    url = "git+https://github.com/seifchen/kong-path-allow.git",
-   branch = "fix/root_path"
+   branch = "master"
 }
 description = {
    summary = "This plugin enables allow path for route, support regex",
