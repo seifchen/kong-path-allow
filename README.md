@@ -1,5 +1,5 @@
 # kong-path-allow
-Determine if the path is in the path allow, if not, return 403
+Determine if a path is allowed, if not, return 403
 # Supporte kong version
 Kong >= 1.2
 # Install
