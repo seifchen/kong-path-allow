@@ -17,8 +17,9 @@ $ luarocks make *.rockspec
 
 # Usage
 ## schema
-* allow_paths: The request path not match this path will forbidden with 403 code
-* regex: boolean, if true will use ngx.re.match to match the request_path and allow_paths, if false, Will strictly judge whether the two path are equal
+* allow_paths: if the request path not match this path will forbidden with 403 code
+* deny_paths: if the request path match this path will forbidden with 403 code
+* regex: boolean, if true will use ngx.re.match to match the request_path and allow_paths/deny_paths, if false, will strictly judge whether the two path are equal
 
 ## Example
 * create service
@@ -74,8 +75,26 @@ $ luarocks make *.rockspec
 {"message":"path not allowed"}
 ```
 
+* create kong-path-deny for route
+```
+  curl -X POST \
+  http://localhost:8001/routes/$routeId/plugins \
+  -H 'Content-Type: application/json' \
+  -d '{
+	"name":"kong-path-allow",
+	"config":{
+		"deny_":["/services/x"],
+		"regex":true
+	}}
+```
+* request /test/services/ will return the services object
+* request /test/services/x will now got 403 
+```
+{"message":"path not allowed"}
+```
 
-* trun the regex to false
+
+* turn the regex to false
 ```
 curl -X PATCH \
   http://localhost:8001/routes/$routeId/plugins/$pluginId \
