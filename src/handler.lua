@@ -47,12 +47,30 @@ end
 
 function kongPathAllow:access(config)
     local allow_paths = config.allow_paths
+    local deny_paths = config.deny_paths
     local regex = config.regex
 
     local target_path = get_target_path()
-    for _, path in ipairs(allow_paths) do
-        if match(target_path, path, regex) then
-            return
+    -- deny_paths
+    if deny_paths then
+        for _, path in ipairs(deny_paths) do
+            if match(target_path, path, regex) then
+                kong.response.exit(403, json.encode({message = "path not allowed"}),
+                    { ["Content-Type"] = "application/json"})
+                return
+            end
+        end
+    end
+    -- deny_paths and not allow_paths => authorize by default
+    if deny_paths and not allow_paths then
+        return
+    end
+    -- allow_paths
+    if allow_paths then
+        for _, path in ipairs(allow_paths) do
+            if match(target_path, path, regex) then
+                return
+            end
         end
     end
     kong.response.exit(403, json.encode({message = "path not allowed"}), {

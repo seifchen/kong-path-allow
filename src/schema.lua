@@ -8,6 +8,7 @@ return {
         type = "record",
         fields = {
           { allow_paths = typedefs.paths},
+          { deny_paths = typedefs.paths },
           { regex = {
               type = "boolean",
               required = true,
