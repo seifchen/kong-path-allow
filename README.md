@@ -31,7 +31,7 @@ $ luarocks make *.rockspec
 	"name":"kong-path-allow-test",
 	"protocol":"http",
 	"host":"localhost",
-	"port":8001}
+	"port":8001}'
 ```
 * create route
 ```
@@ -40,7 +40,7 @@ $ luarocks make *.rockspec
   -H 'Content-Type: application/json' \
   -d '{
 	"name":"kong-path-allow-test",
-	"paths":["/test/"]}
+	"paths":["/test/"]}'
 ```
 * create kong-path-allow for route
 ```
@@ -52,7 +52,7 @@ $ luarocks make *.rockspec
 	"config":{
 		"allow_paths":["/services"],
 		"regex":true
-	}}
+	}}'
 ```
 * request /services will return the services object
 * request /services2 will got 404 not 403
@@ -85,7 +85,7 @@ $ luarocks make *.rockspec
 	"config":{
 		"deny_":["/services/x"],
 		"regex":true
-	}}
+	}}'
 ```
 * request /test/services/ will return the services object
 * request /test/services/x will now got 403 
@@ -105,7 +105,7 @@ curl -X PATCH \
 		"allow_paths":["/services"],
 		"regex":false
 	}
-   }
+   }'
 ```
 
 * request /test/services will return the services object
