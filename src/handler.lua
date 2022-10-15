@@ -1,7 +1,9 @@
 local json = require("cjson")
+local kong_meta     = require "kong.meta"
 local kongPathAllow = {}
 
 kongPathAllow.PRIORITY = 840
+kongPathAllow.VERSION = kong_meta.version
 local kong = kong
 local ngx = ngx
 local re_find = ngx.re.find

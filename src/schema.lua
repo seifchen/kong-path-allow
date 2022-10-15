@@ -7,8 +7,8 @@ return {
     { config = {
         type = "record",
         fields = {
-          { allow_paths = typedefs.paths},
-          { deny_paths = typedefs.paths },
+          { allow_paths = typedefs.router_paths},
+          { deny_paths = typedefs.router_paths},
           { regex = {
               type = "boolean",
               required = true,
