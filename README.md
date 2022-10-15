@@ -40,7 +40,7 @@ $ luarocks make *.rockspec
   -H 'Content-Type: application/json' \
   -d '{
 	"name":"kong-path-allow-test",
-	"paths":["/services"]}
+	"paths":["/test/"]}
 ```
 * create kong-path-allow for route
 ```
@@ -54,8 +54,8 @@ $ luarocks make *.rockspec
 		"regex":true
 	}}
 ```
-* request /test/services will return the services object
-* request /test/services2 will got 404 not 403
+* request /services will return the services object
+* request /services2 will got 404 not 403
 ```
   HTTP/1.1 404 Not Found
   Content-Type: application/json; charset=utf-8
