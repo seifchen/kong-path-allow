@@ -1,5 +1,5 @@
 package = "kong-path-allow"
-version = "0.1-3"
+version = "0.2-0"
 source = {
    url = "git+https://github.com/seifchen/kong-path-allow.git",
    branch = "master"
