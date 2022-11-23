@@ -5,8 +5,8 @@ Kong >= 1.2
 # Install
 ### Select Version
 because this breaking changes with kong version within 2.* and 3.*.
-* If you use kong < 3.0 please use 0.1-3 
-* If you use kong >= 3.0 please use 0.2-0
+* If you use kong < 3.0 please use 0.1-3 or tag:v0.1.3
+* If you use kong >= 3.0 please use 0.2-0 or tag:v0.2.0
 ### Luarocks
 ```
 luarocks install kong-path-allow $version 
@@ -14,7 +14,7 @@ luarocks install kong-path-allow $version
 
 ### Source Code
 ```
-$ git clone https://github.com/seifchen/kong-path-allow.git
+$ git clone -b $tagName https://github.com/seifchen/kong-path-allow.git
 $ cd /path/to/kong/plugins/kong-path-allow
 $ luarocks make *.rockspec
 ```
