@@ -87,7 +87,7 @@ $ luarocks make *.rockspec
   -d '{
 	"name":"kong-path-allow",
 	"config":{
-		"deny_":["/services/x"],
+		"deny_paths":["/services/x"],
 		"regex":true
 	}}'
 ```
