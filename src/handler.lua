@@ -3,7 +3,7 @@ local kong_meta     = require "kong.meta"
 local kongPathAllow = {}
 
 kongPathAllow.PRIORITY = 840
-kongPathAllow.VERSION = kong_meta.version
+kongPathAllow.VERSION = "0.2.1"
 local kong = kong
 local ngx = ngx
 local re_find = ngx.re.find
