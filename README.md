@@ -6,7 +6,7 @@ Kong >= 1.2
 ### Select Version
 because this breaking changes with kong version within 2.* and 3.*.
 * If you use kong < 3.0 please use 0.1-3 or tag:v0.1.3
-* If you use kong >= 3.0 please use 0.2-0 or tag:v0.2.0
+* If you use kong >= 3.0 please use 0.2-1 or tag:v0.2.1
 ### Luarocks
 ```
 luarocks install kong-path-allow $version 
